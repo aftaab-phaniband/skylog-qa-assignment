@@ -44,7 +44,7 @@ npm run report
 
 ### Automated Tests (All 8 Required Scenarios)
 
-**File: `tests/CLEAN\\\_auth.spec.ts`**
+**File: `tests/CLEAN_auth.spec.ts`**
 
 * ✅ **Scenario 1:** Valid sign in reaches bookings list
 
@@ -70,7 +70,7 @@ npm run report
 
 \---
 
-**File: `tests/CLEAN\\\_bookings-list.spec.ts`**
+**File: `tests/CLEAN_bookings-list.spec.ts`**
 
 * ✅ **Scenario 4:** Bookings list loads with correct summary and rows
 
@@ -93,7 +93,7 @@ npm run report
 
 \---
 
-**File: `tests/CLEAN\\\_create-booking.spec.ts`**
+**File: `tests/CLEAN_create-booking.spec.ts`**
 
 * ✅ **Scenario 6:** Valid new booking can be created and appears in list
 
@@ -116,7 +116,7 @@ npm run report
 
 \---
 
-**File: `tests/CLEAN\\\_error-handling.spec.ts`**
+**File: `tests/CLEAN_error-handling.spec.ts`**
 
 * ✅ **Scenario 8:** API failure shows error state with retry button
 
@@ -155,14 +155,14 @@ npm run report
 
 |Scenario|Status|Test File|Notes|
 |-|-|-|-|
-|1. Valid login|✅ Covered|CLEAN\_auth.spec.ts|Complete happy path|
-|2. Wrong password|✅ Covered|CLEAN\_auth.spec.ts|Error + staying on page|
-|3. Account lockout|✅ Covered|CLEAN\_auth.spec.ts|5 attempts + lock verification|
-|4. Bookings list|✅ Covered|CLEAN\_bookings-list.spec.ts|Correct data + pagination|
-|5. Status filtering|✅ Covered|CLEAN\_bookings-list.spec.ts|All 3 statuses tested|
-|6. Create booking|✅ Covered|CLEAN\_create-booking.spec.ts|Happy path complete|
-|7. Form validation|✅ Covered|CLEAN\_create-booking.spec.ts|5 distinct error cases|
-|8. API error handling|✅ Covered|CLEAN\_error-handling.spec.ts|Error state + retry|
+|1. Valid login|✅ Covered|CLEAN_auth.spec.ts|Complete happy path|
+|2. Wrong password|✅ Covered|CLEAN_auth.spec.ts|Error + staying on page|
+|3. Account lockout|✅ Covered|CLEAN_auth.spec.ts|5 attempts + lock verification|
+|4. Bookings list|✅ Covered|CLEAN_bookings-list.spec.ts|Correct data + pagination|
+|5. Status filtering|✅ Covered|CLEAN_bookings-list.spec.ts|All 3 statuses tested|
+|6. Create booking|✅ Covered|CLEAN_create-booking.spec.ts|Happy path complete|
+|7. Form validation|✅ Covered|CLEAN_create-booking.spec.ts|5 distinct error cases|
+|8. API error handling|✅ Covered|CLEAN_error-handling.spec.ts|Error state + retry|
 
 **Total:** 8/8 required scenarios covered (100%)
 
