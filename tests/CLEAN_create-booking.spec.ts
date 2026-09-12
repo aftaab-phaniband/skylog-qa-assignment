@@ -257,4 +257,47 @@ test.describe('Create Booking', () => {
     // Assert: Should still show same total (no new booking added)
     await expect(totalBefore).toBeVisible();
   });
+
+  test('Total bookings card should be updated after cancelling the a existing booking', async({page, request}) => {
+
+    const user = await createTestUser(request);
+    await signIn(page, user.email, user.password);
+
+    //navigate to new booking
+    const totalBefore = page.locator('text=12').first();
+    await expect(totalBefore).toBeVisible();
+
+    // Action: Navigate to new booking page
+    await page.getByRole('link', { name: 'New booking' }).click();
+
+    // Assert: Should be on new booking page
+    await expect(page.getByRole('heading', { name: 'New booking' })).toBeVisible();
+
+    // Action: Fill in the form with valid data
+    const passengerName = 'John Smith';
+    const email = 'john.smith@example.com';
+    const flightNumber = 'W6789';
+    const seats = '2';
+    const departureDate = getTomorrowDate();
+
+    await page.getByLabel('Passenger name').fill(passengerName);
+    await page.getByLabel('Contact email').fill(email);
+    await page.getByLabel('Flight number').fill(flightNumber);
+    await page.getByLabel('Seats').fill(seats);
+    await page.getByLabel('Departure date').fill(departureDate);
+
+    // Action: Submit the form
+    await page.getByRole('button', { name: 'Create booking' }).click();
+
+    // Assert: Should be redirected to bookings list
+    await expect(page.getByRole('heading', { name: 'Bookings' })).toBeVisible();
+
+    //check for the total sets number prior to cncellation
+    
+    await expect(page.getByTestId('summary-seats')).toHaveText('31');
+    await page.getByRole('button', {name: 'Cancel booking BK-0013'}).click();
+
+    //to check the seats booked number changes after cancellation
+    await expect(page.getByTestId('summary-seats')).toHaveText('30');
+  })
 });
