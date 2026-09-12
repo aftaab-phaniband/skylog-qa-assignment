@@ -258,7 +258,7 @@ test.describe('Create Booking', () => {
     await expect(totalBefore).toBeVisible();
   });
 
-  test('Total bookings card should be updated after cancelling the a existing booking', async({page, request}) => {
+  test('Scenario 9: Total bookings card should be updated after cancelling the a existing booking', async({page, request}) => {
 
     const user = await createTestUser(request);
     await signIn(page, user.email, user.password);
