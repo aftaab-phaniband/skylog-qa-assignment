@@ -37,11 +37,11 @@ test.describe('Bookings List', () => {
     await expect(page.getByRole('heading', { name: 'Bookings' })).toBeVisible();
 
     // Assert: Summary cards show correct data
-    
+    await page.waitForTimeout(10000)
     // New account has: 12 total, 7 confirmed, 30 seats
-    await expect(page.locator('text=12')).toBeVisible(); // Total bookings
-    await expect(page.locator('text=7')).toBeVisible();  // Confirmed
-    await expect(page.locator('text=30')).toBeVisible(); // Total seats
+    await expect(page.getByTestId('summary-total')).toHaveText('12'); // Total bookings
+    await expect(page.getByTestId('summary-confirmed')).toHaveText('7')  // Confirmed
+    await expect(page.getByTestId('summary-seats')).toHaveText('30'); // Total seats
 
     // Assert: Table has rows (5 per page)
     const rows = page.locator('table tbody tr');
