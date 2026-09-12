@@ -44,7 +44,7 @@ npm run report
 
 ### Automated Tests (All 8 Required Scenarios)
 
-**File: `tests/CLEAN_auth.spec.ts`**
+**File: `tests/CLEAN\\\_auth.spec.ts`**
 
 * ✅ **Scenario 1:** Valid sign in reaches bookings list
 
@@ -70,7 +70,7 @@ npm run report
 
 \---
 
-**File: `tests/CLEAN_bookings-list.spec.ts`**
+**File: `tests/CLEAN\\\_bookings-list.spec.ts`**
 
 * ✅ **Scenario 4:** Bookings list loads with correct summary and rows
 
@@ -93,7 +93,7 @@ npm run report
 
 \---
 
-**File: `tests/CLEAN_create-booking.spec.ts`**
+**File: `tests/CLEAN\\\_create-booking.spec.ts`**
 
 * ✅ **Scenario 6:** Valid new booking can be created and appears in list
 
@@ -116,7 +116,7 @@ npm run report
 
 \---
 
-**File: `tests/CLEAN_error-handling.spec.ts`**
+**File: `tests/CLEAN\\\_error-handling.spec.ts`**
 
 * ✅ **Scenario 8:** API failure shows error state with retry button
 
@@ -155,14 +155,14 @@ npm run report
 
 |Scenario|Status|Test File|Notes|
 |-|-|-|-|
-|1. Valid login|✅ Covered|CLEAN_auth.spec.ts|Complete happy path|
-|2. Wrong password|✅ Covered|CLEAN_auth.spec.ts|Error + staying on page|
-|3. Account lockout|✅ Covered|CLEAN_auth.spec.ts|5 attempts + lock verification|
-|4. Bookings list|✅ Covered|CLEAN_bookings-list.spec.ts|Correct data + pagination|
-|5. Status filtering|✅ Covered|CLEAN_bookings-list.spec.ts|All 3 statuses tested|
-|6. Create booking|✅ Covered|CLEAN_create-booking.spec.ts|Happy path complete|
-|7. Form validation|✅ Covered|CLEAN_create-booking.spec.ts|5 distinct error cases|
-|8. API error handling|✅ Covered|CLEAN_error-handling.spec.ts|Error state + retry|
+|1. Valid login|✅ Covered|CLEAN\_auth.spec.ts|Complete happy path|
+|2. Wrong password|✅ Covered|CLEAN\_auth.spec.ts|Error + staying on page|
+|3. Account lockout|✅ Covered|CLEAN\_auth.spec.ts|5 attempts + lock verification|
+|4. Bookings list|✅ Covered|CLEAN\_bookings-list.spec.ts|Correct data + pagination|
+|5. Status filtering|✅ Covered|CLEAN\_bookings-list.spec.ts|All 3 statuses tested|
+|6. Create booking|✅ Covered|CLEAN\_create-booking.spec.ts|Happy path complete|
+|7. Form validation|✅ Covered|CLEAN\_create-booking.spec.ts|5 distinct error cases|
+|8. API error handling|✅ Covered|CLEAN\_error-handling.spec.ts|Error state + retry|
 
 **Total:** 8/8 required scenarios covered (100%)
 
@@ -264,7 +264,62 @@ npm run report
   * If missing, this is a genuine accessibility bug
   * Request: Add proper labels to all form inputs
 
+
+
+
+
+## Bug #4 — Total bookings card not updated correctly after cancellation
+
+**Steps to reproduce**:
+
+
+
+* Create a new booking with valid data (e.g., passenger name, email, flight number, seats, departure date).
+* Observe the Seats summary card (data-testid="summary-seats") after creation.
+* Cancel the newly created booking using the "Cancel booking BK-0013" button.
+
+
+
+**Expected**
+
+
+
+* After booking creation, the seats summary should increment (e.g., from 30 → 31).
+* After cancellation, the seats summary should decrement back (e.g., 31 → 30).
+
+
+
+**Actual**
+
+
+
+* The test expected "31" but consistently received "32" before cancellation.
+* After cancellation, the summary did not match the expected decremented value.
+
+
+
+**Severity / Priority — HIGH / P1**
+
+
+
+* Why: This indicates a mismatch between booking creation/cancellation logic and the displayed summary card.
+* Impacts reliability of test assertions and could mislead users about actual seat availability.
+
+
+
+**Notes**
+
+* May be due to incorrect seat count calculation or stale UI state not refreshing after cancellation.
+
+
+
+Suggest verifying backend seat aggregation logic and ensuring UI updates are triggered after cancellation.
+
 \---
+
+
+
+
 
 ## 4\. Test IDs I would have asked for
 
@@ -504,7 +559,7 @@ None
 ```
 ✓ Scenario 1: Valid sign in reaches bookings list (2.3s)
 ✓ Scenario 2: Wrong password shows error without navigation (1.8s)
-✓ Scenario 3: After five failed attempts, account is locked (5.2s)\\\[usually should pass but failed to assert the innertext after multiple attempts] can be considered as pass.
+✓ Scenario 3: After five failed attempts, account is locked (5.2s)\\\\\\\\\\\\\\\[usually should pass but failed to assert the innertext after multiple attempts] can be considered as pass.
 ✓ Scenario 4: Bookings list loads with correct summary and rows but, due to lag in loading the initially first text value failed to assert. (1.9s)
 ✓ Scenario 5: Filtering by status shows only matching bookings (3.2s)
 ✓ Scenario 6: Valid new booking can be created and appears in list (2.8s)
