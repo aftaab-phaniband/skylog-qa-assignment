@@ -30,8 +30,8 @@ test.describe('Error Handling', () => {
     await page.getByRole('button', { name: 'Sign in' }).click();
 
     // Assert: Should see error message (not empty table)
-    const errorMessage = page.locator('text=could not load').or(page.locator('text=Could not reach the server. Check your connection and try again.'));
-    await expect(errorMessage).toBeVisible({ timeout: 10000 });
+    const errorMessage = page.locator('text=Could not reach the server. Check your connection and try again.');
+    await expect(errorMessage).toBeVisible();
 
     // Assert: Should see Retry button
     const retryButton = page.getByRole('button', { name: 'Retry' });
@@ -62,8 +62,8 @@ test.describe('Error Handling', () => {
     await page.getByRole('button', { name: 'Sign in' }).click();
 
     // Assert: Should see error message
-    const errorMessage = page.locator('text=could not load').or(page.locator('text=error'));
-    await expect(errorMessage).toBeVisible({ timeout: 10000 });
+    const errorMessage = page.locator('text=Could not reach the server. Check your connection and try again.');
+    await expect(errorMessage).toBeVisible();
 
     // Assert: Table should NOT be visible
     const table = page.locator('table');
@@ -92,8 +92,8 @@ test.describe('Error Handling', () => {
     await page.getByRole('button', { name: 'Sign in' }).click();
 
     // Assert: Should see error
-    const errorMessage = page.locator('text=could not load').or(page.locator('text=error'));
-    await expect(errorMessage).toBeVisible({ timeout: 10000 });
+    const errorMessage = page.locator('text=Could not reach the server. Check your connection and try again.');
+    await expect(errorMessage).toBeVisible();
 
     // Action: Click Retry
     const retryButton = page.getByRole('button', { name: 'Retry' });
@@ -136,7 +136,7 @@ test.describe('Error Handling', () => {
     await expect(table).not.toBeVisible();
 
     // Assert: No error message should be shown
-    const errorMessage = page.locator('text=could not load').or(page.locator('text=error'));
+    const errorMessage = page.locator('text=Could not reach the server. Check your connection and try again.');
     await expect(errorMessage).not.toBeVisible();
   });
 });
