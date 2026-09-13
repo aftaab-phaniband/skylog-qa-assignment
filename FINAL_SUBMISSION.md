@@ -62,6 +62,7 @@ npm run report
   * Makes 5 consecutive failed login attempts
   * 6th attempt with correct password still fails (locked)
   * I faced error validating the innertext. Tried manually, found a different text appearing instead of the expected text.
+  * Changed the detecting condition with a if block to check the error message for 4 attempts and a with a different error msg for the 5th attempt.
 
 **Additional tests:**
 
@@ -74,7 +75,7 @@ npm run report
 
 * ✅ **Scenario 4:** Bookings list loads with correct summary and rows
 
-  * Verifies summary cards show: 12 total, 7 confirmed, 30 seats. faced issue validating the value "12". This is because of the delay in loading the page. Here I would have used the page.waitforTimeout() method so that the value was visible early to validate.
+  * Verifies summary cards show: 12 total, 7 confirmed, 30 seats. faced issue validating the value "12". because of non availabiluty of tags to assert. Used the testid attribute to assert.
   * Checks table displays 5 rows (first page)
   * Confirms pagination buttons correct (Previous disabled, Next enabled)
   * Validates "Page 1 of 3" indicator
