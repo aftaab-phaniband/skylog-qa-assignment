@@ -1,3 +1,4 @@
+//"APIRequestContext"A TypeScript type that represents Playwright’s API client for making HTTP requests.
 import { test, expect, type APIRequestContext } from '@playwright/test';
 
 /**
@@ -13,7 +14,12 @@ async function createTestUser(request: APIRequestContext) {
   expect(response.status()).toBe(201);
   return response.json() as Promise<{ email: string; password: string }>;
 }
+/*Parses the response body as JSON.
 
+Casts it to a Promise that resolves to an object with email and password fields.
+
+This ensures TypeScript knows exactly what shape the returned data has.
+*/
 
 test.describe('Authentication', () => {
   test('Scenario 1: Valid sign in reaches bookings list', async ({ page, request }) => {
@@ -64,14 +70,19 @@ test.describe('Authentication', () => {
 
     // Action: Make 5 failed login attempts
     for (let i = 0; i < 5; i++) {
-      await page.goto('/login');
-      await page.getByLabel('Email').fill(user.email);
-      await page.getByLabel('Password').fill(`WrongPassword${i}`);
-      await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.goto('/login');
+  await page.getByLabel('Email').fill(user.email);
+  await page.getByLabel('Password').fill(`WrongPassword${i}`);
+  await page.getByRole('button', { name: 'Sign in' }).click();
 
-      // Wait for error message to appear
-      await expect(page.locator('text=Email or password is incorrect')).toBeVisible();
-    }
+  if (i < 4) {
+    // First 4 attempts → incorrect password message
+    await expect(page.locator('text=Email or password is incorrect')).toBeVisible();
+  } else {
+    // 5th attempt → account lockout message
+    await expect(page.locator('text=Too many failed attempts. Try again in 30 seconds.')).toBeVisible();
+  }
+}
 
     // Action: Try to sign in again (6th attempt) with CORRECT password
     await page.goto('/login');
